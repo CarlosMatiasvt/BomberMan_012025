@@ -14,6 +14,7 @@
 #include "BloqueRoca.h"
 #include "BloqueOro.h"
 #include "BloqueVidrio.h"
+#include "EnemigoPadre.h"
 
 ABomberMan_012025GameMode::ABomberMan_012025GameMode()
 {
@@ -47,6 +48,7 @@ void ABomberMan_012025GameMode::BeginPlay()
 
 				// Llamamos a la función para generar un bloque
 				SpawnBloque(posicionBloque, valor);
+				SpawnEnemigo(posicionBloque, valor);
 			}
 		}
 	}
@@ -88,7 +90,39 @@ void ABomberMan_012025GameMode::SpawnBloque(FVector posicionBloque, int32 tipoBl
 		aBloques.Add(BloqueGenerado);
 	}
 }
+void ABomberMan_012025GameMode::SpawnEnemigo(FVector posicion, int32 tipoEnemigo)
+{
+	AEnemigoPadre* EnemigoGenerado = nullptr;
+	switch (tipoEnemigo)
+	{
+	case 11: EnemigoGenerado = GetWorld()->SpawnActor<AEnemigoPadre>(AEnemigoPadre::StaticClass(), posicion, FRotator(0.0f, 0.0f, 0.0f));
+		break;
+	default:
+		break;
+	}
+	if (EnemigoGenerado)
+	{
+		aEnemigos.Add(EnemigoGenerado);
+	}
+}
 void ABomberMan_012025GameMode::DestruirBloque()
+{
+	int numeroBloques = aBloques.Num();
+	int NumeroAleatorio = FMath::RandRange(2, numeroBloques);
+
+	if (aBloques.Num() > 0)
+	{
+		BloqueActual = aBloques[NumeroAleatorio]; // Obtén el primer bloque
+		if (BloqueActual)
+		{
+			BloqueActual->Destroy();
+			// Realiza operaciones con el bloque
+			//primerBloque->SetActorLocation(FVector(100.0f, 100.0f, 100.0f));
+		}
+	}
+}
+
+void ABomberMan_012025GameMode::EliminarEnemigo()
 {
 }
 
