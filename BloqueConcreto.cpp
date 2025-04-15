@@ -12,7 +12,7 @@ ABloqueConcreto::ABloqueConcreto()
 	}
 	FloatSpeed = 3.0f;
 	RotationSpeed = 3.0f;
-	bPuedeMoverse = FMath::RandBool();
+	bPuedeMoverse = false;
 
 };
 

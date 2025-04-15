@@ -10,10 +10,10 @@ ABloqueLadrillo::ABloqueLadrillo()
 	{
 		MallaBloque->SetMaterial(0, Material.Object);
 	}
-	FloatSpeed = 3.0f;
+	FloatSpeed = 2.0f;
 	RotationSpeed = 3.0f;
 
-	bPuedeMoverse = false;
+	bPuedeMoverse = FMath::RandBool();
 }
 
 void ABloqueLadrillo::BeginPlay()
@@ -27,7 +27,12 @@ void ABloqueLadrillo::Tick(float DeltaTime)
 	if (bPuedeMoverse)
 	{
 		FVector NewLocation = PosicionInicial;
-		NewLocation.X = PosicionInicial.X+FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed)*100.f;
+		NewLocation.Z = FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed) * 170.0f + 190.0f;
+		SetActorLocation(NewLocation);
+	}
+	else {
+		FVector NewLocation = PosicionInicial;
+		NewLocation.X = PosicionInicial.X + FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed) * 100.0f;
 		SetActorLocation(NewLocation);
 	}
 }

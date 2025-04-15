@@ -27,6 +27,10 @@ ABloque::ABloque()
 
 		MallaBloque->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
 	}
+	// ?? Activar colisiones
+	MallaBloque->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	MallaBloque->SetCollisionObjectType(ECollisionChannel::ECC_WorldStatic);
+	MallaBloque->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
 	FloatSpeed = 5.0f;
 	RotationSpeed = 3.0f;
 
@@ -47,34 +51,7 @@ void ABloque::BeginPlay()
 void ABloque::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (bPuedeMoverse)
-	{
-		FVector NewLocation = PosicionInicial;
-	    NewLocation.Z = FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed) * 170.0f + 230.0f;
-		SetActorLocation(NewLocation);
-	}
-	//if (bPuedeMoverse)
-	//{
-		//FVector NewLocation = GetActorLocation();
-		//FRotator NewRotation = GetActorRotation();
-		//float RunningTime = GetGameTimeSinceCreation();
-
-		// Aleatoriedad en el desplazamiento en Z
-		//float DeltaHeight = (-3.0f, 3.0f) * FloatSpeed;
-		//NewLocation.Z = FMath::Sin(GetGameTimeSinceCreation() * FloatSpeed) * 170.0f + 300.0f;
-
-
-		// Asegurarse de que el bloque no se mueva más allá del suelo
-		// Limitar la posición Z para que no vaya más abajo que el valor 0
-		//NewLocation.Z = FMath::Clamp(NewLocation.Z, 0.0f, 500.0f); // El bloque no irá más abajo que 0, ni más arriba que 500
-		// Aleatoriedad en la rotación
-		//float DeltaRotation = FMath::FRandRange(-1.0f, 1.0f) * RotationSpeed;
-		//NewRotation.Yaw += DeltaRotation;
-
-		//SetActorLocation(NewLocation);
-
-		//SetActorLocationAndRotation(NewLocation, NewRotation);
-	//}*/
+	
 }
 
 
