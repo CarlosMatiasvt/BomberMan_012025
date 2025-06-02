@@ -41,9 +41,8 @@ public:
 	void SpawnPersonaje();
 	//void MoverBloques();
 	//void SpawnBloques();
-	void SpawnBloque(FVector posicion, int32 tipoBloque);
-
 	void DestruirBloque();
+
 
 
 };

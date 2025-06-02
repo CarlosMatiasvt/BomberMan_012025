@@ -30,6 +30,13 @@ public:
 	float RotationSpeed;
 	bool bPuedeMoverse;
 	FVector PosicionInicial;
-	
+	//Factory method
+	static ABloque* CreateBloque(UWorld* World, const FVector& Location, const FRotator& Rotation)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		return World->SpawnActor<ABloque>(Location, Rotation, SpawnParams);
+	} //esto hace que se pueda crear un bloque desde cualquier parte del juego 
+	//sin necesidad de tener una referencia a la clase Bloque directamente
 
 };
